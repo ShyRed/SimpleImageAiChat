@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="SimpleImageAiChat/App.axaml" value="SimpleImageAiChat/SimpleImageAiChat.csproj" />
+        <entry key="SimpleImageAiChat/MainWindow.axaml" value="SimpleImageAiChat/SimpleImageAiChat.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

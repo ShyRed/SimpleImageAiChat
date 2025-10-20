@@ -1,0 +1,53 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:SimpleImageAiChat"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        Width="800" Height="600"
+        x:Class="SimpleImageAiChat.MainWindow"
+        Title="SimpleImageAiChat"
+        x:DataType="vm:MainViewModel">
+    <DockPanel>
+        
+        <HyperlinkButton DockPanel.Dock="Top"
+                         NavigateUri="https://huggingface.co/microsoft/Phi-3.5-vision-instruct-onnx/tree/main/cpu_and_mobile/cpu-int4-rtn-block-32-acc-level-4">
+            Download the model files and place them in `model/cpu-int4-rtn-block-32-acc-level-4` folder.
+        </HyperlinkButton>
+        
+        <StackPanel DockPanel.Dock="Bottom" Margin="10"
+                    Spacing="5">
+            <TextBlock Text="System Prompt" />
+            <TextBox Text="{Binding SystemPrompt}"/>
+            
+            <TextBlock Text="User Prompt" />
+            <TextBox Text="{Binding UserPrompt}" />
+            
+            <TextBlock Text="Image Path" />
+            <TextBox Text="{Binding ImagePath}" />
+
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="5">
+                <Button Content="Generate"
+                        Command="{Binding GenerateResponseCommand}"
+                        Grid.Column="0"
+                        VerticalAlignment="Stretch"
+                        VerticalContentAlignment="Center"/>
+                <StackPanel Spacing="5"
+                            Grid.Column="1">
+                    <TextBlock Text="AI Response" />
+                    <TextBox
+                        Text="{Binding AiResponse, Mode=OneWay}"
+                        IsReadOnly="True"
+                        TextWrapping="Wrap"
+                        MinHeight="100" />
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        
+        <Border Margin="10">
+            <Image Source="{Binding CurrentImage}"
+                   Margin="10"/>
+        </Border>
+       
+    </DockPanel>
+</Window>
