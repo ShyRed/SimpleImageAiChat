@@ -10,11 +10,12 @@
         x:DataType="vm:MainViewModel">
     <DockPanel>
         
-        <HyperlinkButton DockPanel.Dock="Top"
-                         NavigateUri="https://huggingface.co/microsoft/Phi-3.5-vision-instruct-onnx/tree/main/cpu_and_mobile/cpu-int4-rtn-block-32-acc-level-4">
-            Download the model files and place them in `model/cpu-int4-rtn-block-32-acc-level-4` folder.
-        </HyperlinkButton>
-        
+        <DockPanel.Styles>
+            <Style Selector="TextBox[IsReadOnly=false]">
+                <Setter Property="IsEnabled" Value="{Binding GenerateResponseCommand.IsRunning, Converter={x:Static BoolConverters.Not}}"/>
+            </Style>
+        </DockPanel.Styles>
+       
         <StackPanel DockPanel.Dock="Bottom" Margin="10"
                     Spacing="5">
             <TextBlock Text="System Prompt" />
@@ -31,7 +32,14 @@
                         Command="{Binding GenerateResponseCommand}"
                         Grid.Column="0"
                         VerticalAlignment="Stretch"
-                        VerticalContentAlignment="Center"/>
+                        VerticalContentAlignment="Center"
+                        IsVisible="{Binding GenerateResponseCommand.IsRunning, Converter={x:Static BoolConverters.Not}}"/>
+                <Button Content="Abort"
+                        Command="{Binding GenerateResponseCancelCommand}"
+                        Grid.Column="0"
+                        VerticalAlignment="Stretch"
+                        VerticalContentAlignment="Center"
+                        IsVisible="{Binding GenerateResponseCommand.IsRunning}"/>
                 <StackPanel Spacing="5"
                             Grid.Column="1">
                     <TextBlock Text="AI Response" />
